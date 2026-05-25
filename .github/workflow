@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - features/tfstate
   pull_request:
 
 jobs:
