@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - features/k8sdeployment
+      - features/tfstate
   workflow_dispatch:
     inputs:
       environment:
