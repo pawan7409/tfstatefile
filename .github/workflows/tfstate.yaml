@@ -61,7 +61,7 @@ jobs:
 
       # Terraform Init
       - name: Terraform Init
-        working-directory: .
+        working-directory: ./tfstaefile
         run: |
           cd azure
           terraform init \
