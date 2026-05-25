@@ -4,8 +4,31 @@ on:
   push:
     branches:
       - main
-      - features/tfstate
-  pull_request:
+      - features/k8sdeployment
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Deployment environment'
+        required: false
+        default: 'production'
+        type: choice
+        options:
+          - production
+          - staging
+          - development
+      apply_terraform:
+        description: 'Apply Terraform changes'
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  id-token: write
+  contents: read
+
+env:
+  REGISTRY: myregistry.azurecr.io
+
 
 jobs:
   terraform:
