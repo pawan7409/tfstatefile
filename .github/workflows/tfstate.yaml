@@ -62,11 +62,7 @@ jobs:
       # Terraform Init
       - name: Terraform Init
         run: |
-          terraform init \
-            -backend-config="storage_account_name=${{ secrets.TF_STATE_STORAGE }}" \
-            -backend-config="container_name=tfstate" \
-            -backend-config="key=backend.tfstate" \
-            -backend-config="resource_group_name=${{ secrets.AZURE_RESOURCE_GROUP }}"
+          terraform init
 
       # Terraform Format Check
       - name: Terraform Format
