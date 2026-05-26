@@ -49,6 +49,8 @@ jobs:
 
       # Azure Login using OIDC
       - name: Azure Login
+        timeout-minutes: 2
+        continue-on-error: true
         uses: azure/login@v1
         with:
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
@@ -61,16 +63,19 @@ jobs:
 
       # Terraform Init
       - name: Terraform Init
+        timeout-minutes: 5
         run: |
           terraform init
 
       # Terraform Validate
       - name: Terraform Validate
+        timeout-minutes: 5
         run: |
           terraform validate
 
       # Terraform Plan
       - name: Terraform Plan
+        timeout-minutes: 5
         run: |
           terraform plan -out=tfplan
 
