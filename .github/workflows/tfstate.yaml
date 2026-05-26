@@ -61,7 +61,6 @@ jobs:
 
       # Terraform Init
       - name: Terraform Init
-        working-directory: ./tfstatefile
         run: |
           cd azure
           terraform init \
@@ -72,21 +71,18 @@ jobs:
 
       # Terraform Format Check
       - name: Terraform Format
-        working-directory: ./tfstatefile
         run: |
           cd azure
           terraform fmt -check
 
       # Terraform Validate
       - name: Terraform Validate
-        working-directory: ./tfstatefile
         run: |
           cd azure
           terraform validate
 
       # Terraform Plan
       - name: Terraform Plan
-        working-directory: ./tfstatefile
         run: |
           cd azure
           terraform plan -out=tfplan
@@ -94,7 +90,6 @@ jobs:
       # Terraform Apply (only on main branch)
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main'
-        working-directory: ./tfstatefile
         run: |
           cd azure
           terraform apply -auto-approve tfplan
