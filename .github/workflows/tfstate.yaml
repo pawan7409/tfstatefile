@@ -62,7 +62,6 @@ jobs:
       # Terraform Init
       - name: Terraform Init
         run: |
-          cd azure
           terraform init \
             -backend-config="storage_account_name=${{ secrets.TF_STATE_STORAGE }}" \
             -backend-config="container_name=tfstate" \
@@ -72,24 +71,20 @@ jobs:
       # Terraform Format Check
       - name: Terraform Format
         run: |
-          cd azure
           terraform fmt -check
 
       # Terraform Validate
       - name: Terraform Validate
         run: |
-          cd azure
           terraform validate
 
       # Terraform Plan
       - name: Terraform Plan
         run: |
-          cd azure
           terraform plan -out=tfplan
 
       # Terraform Apply (only on main branch)
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main'
         run: |
-          cd azure
           terraform apply -auto-approve tfplan
