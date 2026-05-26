@@ -57,27 +57,6 @@ resource "azurerm_storage_container" "backend_uploads" {
   container_access_type = "private"
 }
 
-# Storage account network rules (for security)
-resource "azurerm_storage_account_network_rules" "backend_network" {
-  storage_account_id         = azurerm_storage_account.backend_storage.id
-  default_action             = "Allow"
-  bypass                     = ["AzureServices"]
-  virtual_network_subnet_ids = [module.pcam_networking.aks_subnet_id]
-}
-
-# Create storage account access key (for backend services)
-resource "azurerm_storage_account_sas" "backend_sas" {
-  storage_account_name = azurerm_storage_account.backend_storage.name
-  
-  signed_version       = "2021-06-08"
-  signed_services      = "b"  # blob
-  signed_resource_types = "sco"  # service, container, object
-  signed_permissions   = "racwd"  # read, add, create, write, delete
-  
-  start  = timeadd(timestamp(), "-1h")
-  expiry = timeadd(timestamp(), "8760h")  # 1 year
-}
-
 # Outputs
 output "backend_storage_account_name" {
   value       = azurerm_storage_account.backend_storage.name

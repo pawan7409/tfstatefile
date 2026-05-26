@@ -30,6 +30,7 @@ variable "tags" {
 variable "backend_storage_rg_name" {
   description = "Name of the resource group for backend storage"
   type        = string
+  default     = "backend-storage-rg"
 }
 
 # ========================================
@@ -39,6 +40,7 @@ variable "backend_storage_rg_name" {
 variable "backend_storage_account_name" {
   description = "Name of the backend storage account (must be globally unique)"
   type        = string
+  default     = "backendstg001"
 }
 
 variable "backend_storage_replication_type" {
