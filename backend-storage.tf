@@ -70,9 +70,9 @@ resource "azurerm_storage_account_sas" "backend_sas" {
   storage_account_name = azurerm_storage_account.backend_storage.name
 
   signed_version        = "2021-06-08"
-  signed_services       = "b" # blob
-  signed_resource_types = "sco" # service, container, object
-  signed_permissions    = "racwd" # read, add, create, write, delete
+  signed_services       = "b"         # blob
+  signed_resource_types = "sco"       # service, container, object
+  signed_permissions    = "racwd"     # read, add, create, write, delete
 
   start  = timeadd(timestamp(), "-1h")
   expiry = timeadd(timestamp(), "8760h") # 1 year
